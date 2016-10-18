@@ -13,3 +13,7 @@
 # mod_three [7]  # => [1]
 #
 # mod_three [0,1,2,3,4,5,6,7] # => [1, 2, 1, 2, 1]
+
+def mod_three(numbers)
+  numbers.map{|x|  x!=0?x%3:0}.select{|x|x>0}
+end
