@@ -20,6 +20,13 @@
 
 def hi_hi_goodbye
   # your code here
+    while 1<2
+     number = gets.chomp
+     break if number == "bye" 
+     puts number
+     puts "hi " * number.to_i  
+    end   
+    puts 'goodbye'
 end
 
 
