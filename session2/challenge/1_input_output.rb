@@ -9,4 +9,7 @@
 
 def sum_difference_product
   # your code goes here
+  input=gets.chomp.scan(/-?\d+/).map{|x| x.to_f}
+  puts "#{input[0]+input[1]} #{input[0]-input[1]} #{input[0]*input[1]} "
 end
+
