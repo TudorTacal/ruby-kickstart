@@ -14,3 +14,11 @@
 # prime_chars? ['ab', 'cd']       # => false
 # prime_chars? ['a', 'bcd']       # => false
 # prime_chars? ['a', 'b', 'cd']   # => false
+
+require 'prime'
+def prime_chars?(numbers)
+  sum = 0
+  numbers.map{|x| x.length}.each{|x| sum +=x}
+  sum.prime? ? true : false
+end
+
