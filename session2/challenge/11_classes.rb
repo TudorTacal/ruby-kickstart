@@ -53,9 +53,14 @@ class BeerSong
    def print_song
      bottles=@bottles
      return String.new if bottles==0
+     
     while bottles >=0
-    transform(bottles)!="One"? plural = "bottles" : plural = "bottle"
-  
+      if transform(bottles) == "One"
+       puts plural = "bottle" 
+      else 
+       puts plural = "bottles" 
+      end
+      
       puts "#{transform(bottles)} #{plural} of beer on the wall," 
       puts "#{transform(bottles)} #{plural} of beer,"
       puts "Take one down, pass it around,"
@@ -63,9 +68,11 @@ class BeerSong
       break if bottles==1
       puts "..."
       bottles-=1
+      
     end
   end
 end
-song = BeerSong.new 1
+song = BeerSong.new 21
+
 
 song.print_song
