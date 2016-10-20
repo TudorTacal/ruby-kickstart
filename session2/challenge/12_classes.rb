@@ -50,9 +50,3 @@ class Fraction
   end
 end
 
-f = Fraction.new 20, 60
-p f.numerator
-p f.denominator
-p f.to_f
-p f.to_s
-p f.lowest.to_s
