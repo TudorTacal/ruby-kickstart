@@ -26,14 +26,31 @@
 
 
 class Person
-  attr_accessor :name
+  attr_accessor :name, :quote, :age
 
-  def initialize(&initializer)
-    @initializer = initializer
-    initializer.call self
+  def initialize(args={}, &initializer)
+     self.name  =  args[:name]
+     self.quote =  args[:quote]
+     self.age   =  args[:age]
+    
+    @initializer = (initializer || Proc.new {|x|} )
+    @initializer.call self
   end
 
   def reinit
     @initializer.call self
   end
 end
+
+coder = Person.new :name => 'Tudor' do |nm|
+  
+  nm.name = 'Dan'
+  nm.quote = 'The best coder in London'
+
+end
+p coder.name
+p coder.name = 'Tudor'
+coder.reinit
+p coder.name
+ alex = Person.new(:name => 'Alex')
+p alex.name
