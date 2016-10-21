@@ -29,4 +29,12 @@
 # shared [1,2,3], [3,2,1]            # => [{1=>[true, true], 2=>[true, true], 3=>[true, true]}, [1, 2, 3]]
 
 def shared(a, b)
+    hash = Hash.new {|this_hash, key| this_hash[key] = [a.include?(key)||nil,b.include?(key)||nil]}
+    a.each{|x| hash[x]}
+    b.each{|x| hash[x]}
+    values = hash.select{|key, value| hash[key] if value == [true,true]}.keys
+    result =[hash,values.sort]
+    
+    
 end
+#shared([1,2,3],[1,2,4])
