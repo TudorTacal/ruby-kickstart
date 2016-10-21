@@ -22,7 +22,7 @@
 # NOTE: This code will only work with the rake tests, which will define the order and current_user
 # you will not be able to run this code outside of the test
 
-
+=begin
 def pay_by_visa(order, ccn)
   order.compute_cost
   order.compute_shipping
@@ -54,5 +54,36 @@ def pay_by_store_credit(order)
   order.compute_tax
   order.payment :type => :store_credit
   current_user.store_credit -= order.cost   # current_user is a method with no params (ie, the customer)
+  order.ship_goods
+end
+=end
+def pay_by_visa(order, ccn)
+  pay_by(order) do 
+    order.payment :type => :visa, :ccn => ccn
+    order.verify_payment
+  end
+end
+
+def pay_by_check(order)
+  pay_by(order) {order.payment :type => :check, :signed => true}
+ 
+end
+
+def pay_by_cash(order)
+  pay_by(order) { order.payment :type => :cash}
+end
+
+def pay_by_store_credit(order,current_user)
+  pay_by(order) do 
+    order.payment :type => :store_credit
+    current_user.store_credit -= order.cost   # current_user is a method with no params (ie, the customer)
+  end
+end
+
+def pay_by(order,&block)
+  order.compute_cost
+  order.compute_shipping
+  order.compute_tax
+  yield
   order.ship_goods
 end
