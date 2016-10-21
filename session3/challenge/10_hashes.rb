@@ -29,5 +29,24 @@
 # create it from scratch :)
 
 
-def pathify
+def pathify(paths=Hash.new)
+  return paths.map {|x| '/' + x} if paths.is_a? Array
+  
+  to_return = []
+  paths.each do |parent, child|
+    
+    parent = '/' + parent
+    puts "#{parent}"
+    child_paths = pathify child
+    puts "#{child_paths}"
+    puts "#{parent}"
+    child_paths.each do |child_path|
+      puts child_path
+      to_return << parent + child_path
+      puts to_return
+    end
+  end
+  to_return
 end
+
+p pathify 'usr' => {'bin' => ['ruby', 'perl']}
