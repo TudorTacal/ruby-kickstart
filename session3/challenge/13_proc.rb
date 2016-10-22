@@ -52,5 +52,16 @@
 #   end
 # end       # => ["a", "m", "r", 1, 3, 4, 9, 2.5, 9.0, 25.8]
 
-def your_sort
+def your_sort(array, &block)
+    block ||= Proc.new {|a,b| a<=>b}
+    array.each_index do |index1|
+      array.each_index do |index2|
+        order = block.call(array[index1],array[index2])
+        array[index1], array[index2]=array[index2], array[index1] if order<0
+      end
+    end
+      
+    
+    
 end
+p your_sort [24, 0, 68, 44, 68, 47, 42, 66, 89, 22] 
